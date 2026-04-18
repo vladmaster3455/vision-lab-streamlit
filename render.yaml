@@ -6,14 +6,14 @@ services:
     buildCommand: |
       pip install --upgrade pip setuptools wheel
       pip install -r requirements.txt
-    startCommand: gunicorn app:app --bind 0.0.0.0:$PORT --workers 1 --threads 4 --timeout 300
+    startCommand: gunicorn app:app --bind 0.0.0.0:$PORT --workers 1 --threads 1 --timeout 120
     envVars:
       - key: PYTHON_VERSION
         value: 3.10.13
       - key: DEVICE
         value: cpu
       - key: ENABLE_DINO
-        value: "1"
+        value: "0"
       - key: YOLO_WEIGHTS
         value: yolo11n.pt
       - key: RTDETR_WEIGHTS

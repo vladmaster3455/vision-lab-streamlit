@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import os
 import uuid
+import gc
 from pathlib import Path
 from typing import Dict
 
@@ -76,10 +77,23 @@ def allowed_file(filename: str) -> bool:
     return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
+def clear_loaded_models(keep_key: str | None = None):
+    keys_to_drop = [key for key in MODEL_CACHE.keys() if key != keep_key]
+    for key in keys_to_drop:
+        MODEL_CACHE.pop(key, None)
+    if torch.cuda.is_available():
+        torch.cuda.empty_cache()
+    gc.collect()
+
+
 def get_model(name: str):
     key = name.lower()
     if key in MODEL_CACHE:
+        # Enforce single-model residency to cap memory on small instances.
+        clear_loaded_models(keep_key=key)
         return MODEL_CACHE[key]
+
+    clear_loaded_models()
 
     if key == "yolo":
         MODEL_CACHE[key] = YOLO(os.getenv("YOLO_WEIGHTS", "yolo11n.pt"))
@@ -484,7 +498,9 @@ HTML = """
                     <select name="model" id="model">
                         <option value="yolo">YOLO</option>
                         <option value="rtdetr">RT-DETR</option>
+                        {% if enable_dino %}
                         <option value="dino">DINO</option>
+                        {% endif %}
                     </select>
                 </div>
 
@@ -643,6 +659,16 @@ def runs_file(filename):
     return send_from_directory(RUNS, filename)
 
 
+@app.route("/healthz", methods=["GET"])
+def healthz():
+    return {"status": "ok"}, 200
+
+
+@app.route("/health", methods=["GET"])
+def health():
+    return {"status": "ok"}, 200
+
+
 @app.route("/examples/<path:key>")
 def example_file(key):
     path = EXAMPLE_IMAGE_MAP.get(key)
@@ -673,6 +699,7 @@ def index():
             model_name_display="-",
             analysis_mode="-",
             has_results=False,
+            enable_dino=ENABLE_DINO,
         )
 
     try:
@@ -726,6 +753,7 @@ def index():
             model_name_display=model_name_display,
             analysis_mode=analysis_mode,
             has_results=True,
+            enable_dino=ENABLE_DINO,
         )
     except Exception as e:
         return render_template_string(
@@ -740,6 +768,7 @@ def index():
             model_name_display="-",
             analysis_mode="-",
             has_results=False,
+            enable_dino=ENABLE_DINO,
         )
 
 
