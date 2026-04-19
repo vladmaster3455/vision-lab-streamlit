@@ -81,7 +81,7 @@ Si tu vois `libgthread-2.0.so.0` manquante:
 
 Si tu vois `Failed building wheel for pillow`:
 
-1. verifie que `requirements.txt` contient `pillow>=11.3.0`
+1. verifie que `requirements.txt` contient `pillow>=10.4.0,<11` (compatible avec `streamlit==1.36.0`)
 2. verifie que `runtime.txt` est `python-3.11`
 3. fais Clear cache + Reboot + Redeploy
 
