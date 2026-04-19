@@ -28,10 +28,10 @@ pip install mmengine>=0.10.5 mmcv-lite>=2.1.0,<2.2.0 mmdet>=3.3.0
 3. New app
 4. Choisis le repo et la branche
 5. Main file path: streamlit_app.py
-6. Python version: 3.11 ou 3.14
+6. Python version: 3.11
 7. Deploy
 
-Important: `runtime.txt` en `python-3.11` reste recommande pour stabilite, mais l'app est maintenant compatible 3.14.
+Important: garde `runtime.txt` avec `python-3.11` si tu veux utiliser DINO.
 
 ## 3) Variables optionnelles
 
@@ -44,7 +44,7 @@ Important: `runtime.txt` en `python-3.11` reste recommande pour stabilite, mais 
 ## 4) Si DINO ne marche pas
 
 - verifie que mmengine, mmcv-lite et mmdet sont installes (dans requirements du deploy)
-- utilise Python 3.11 pour DINO (mmdet non garanti en 3.14)
+- utilise Python 3.11 pour DINO (mmdet non supporte de maniere fiable en 3.14)
 - regarde les logs de build
 - teste YOLO d abord pour confirmer que l app demarre
 
