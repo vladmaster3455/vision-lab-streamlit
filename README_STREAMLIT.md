@@ -79,6 +79,12 @@ Si tu vois `libgthread-2.0.so.0` manquante:
 2. garde `ffmpeg` absent (ne pas le remettre)
 3. push, puis Reboot app + Clear cache + Redeploy
 
+Si tu vois `Failed building wheel for pillow`:
+
+1. verifie que `requirements.txt` contient `pillow>=11.3.0`
+2. verifie que `runtime.txt` est `python-3.11`
+3. fais Clear cache + Reboot + Redeploy
+
 ## 8) Ou sont les modeles (poids) sur Streamlit Cloud
 
 Tu ne vois pas forcement les fichiers de poids dans ton repo GitHub, c est normal.
