@@ -28,10 +28,10 @@ pip install mmengine>=0.10.5 mmcv-lite>=2.1.0,<2.2.0 mmdet>=3.3.0
 3. New app
 4. Choisis le repo et la branche
 5. Main file path: streamlit_app.py
-6. Python version: 3.11 (important)
+6. Python version: 3.11 ou 3.14
 7. Deploy
 
-Important: garde le fichier `runtime.txt` dans le repo avec `python-3.11` pour eviter Python 3.14 sur Cloud.
+Important: `runtime.txt` en `python-3.11` reste recommande pour stabilite, mais l'app est maintenant compatible 3.14.
 
 ## 3) Variables optionnelles
 
@@ -81,7 +81,7 @@ Si tu vois `libgthread-2.0.so.0` manquante:
 
 Si tu vois `Failed building wheel for pillow`:
 
-1. verifie que `requirements.txt` contient `pillow>=10.4.0,<11` (compatible avec `streamlit==1.36.0`)
+1. verifie que `requirements.txt` contient `streamlit==1.56.0` et `pillow>=11.3.0`
 2. verifie que `runtime.txt` est `python-3.11`
 3. fais Clear cache + Reboot + Redeploy
 
