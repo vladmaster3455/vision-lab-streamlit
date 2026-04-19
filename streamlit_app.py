@@ -11,7 +11,14 @@ import pandas as pd
 import streamlit as st
 import torch
 from PIL import Image, ImageDraw
-from ultralytics import RTDETR, YOLO
+
+ULTRA_IMPORT_ERROR: Exception | None = None
+try:
+    from ultralytics import RTDETR, YOLO
+except Exception as exc:  # pragma: no cover
+    ULTRA_IMPORT_ERROR = exc
+    RTDETR = None
+    YOLO = None
 
 MMDET_IMPORT_ERROR: Exception | None = None
 try:
@@ -52,8 +59,18 @@ def get_model(model_name: str):
     clear_models()
 
     if model_name == "YOLO":
+        if YOLO is None:
+            raise RuntimeError(
+                "YOLO indisponible: import ultralytics/cv2 impossible dans cet environnement. "
+                f"Detail: {ULTRA_IMPORT_ERROR}"
+            )
         MODEL_CACHE[model_name] = YOLO(MODEL_CONFIG[model_name])
     elif model_name == "RTDETR":
+        if RTDETR is None:
+            raise RuntimeError(
+                "RTDETR indisponible: import ultralytics/cv2 impossible dans cet environnement. "
+                f"Detail: {ULTRA_IMPORT_ERROR}"
+            )
         MODEL_CACHE[model_name] = RTDETR(MODEL_CONFIG[model_name])
     elif model_name == "DINO":
         if DetInferencer is None:
