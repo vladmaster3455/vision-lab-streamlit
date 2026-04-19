@@ -70,8 +70,5 @@ Si tu vois `cannot open shared object file: libGL.so.1`:
 1. verifie que le fichier `packages.txt` est bien present dans le repo
 2. contenu minimum conseille:
 	- `libgl1`
-	- `libglib2.0-0`
-	- `libsm6`
-	- `libxext6`
-	- `ffmpeg`
-3. push `packages.txt`, puis fais Reboot app + Clear cache + Redeploy
+3. n'ajoute `ffmpeg` ou `libglib2.0-0` que si un log le demande explicitement (sinon cela peut casser l'installation apt)
+4. push `packages.txt`, puis fais Reboot app + Clear cache + Redeploy
