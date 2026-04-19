@@ -75,7 +75,7 @@ Si tu vois `cannot open shared object file: libGL.so.1`:
 
 Si tu vois `libgthread-2.0.so.0` manquante:
 
-1. ajoute `libglib2.0-0` dans `packages.txt`
+1. ajoute `libglib2.0-0t64` dans `packages.txt` (image Debian recente Streamlit)
 2. garde `ffmpeg` absent (ne pas le remettre)
 3. push, puis Reboot app + Clear cache + Redeploy
 
