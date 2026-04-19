@@ -43,7 +43,8 @@ Important: `runtime.txt` en `python-3.11` reste recommande pour stabilite, mais 
 
 ## 4) Si DINO ne marche pas
 
-- verifie que mmengine, mmcv-lite et mmdet sont installes
+- verifie que mmengine, mmcv-lite et mmdet sont installes (dans requirements du deploy)
+- utilise Python 3.11 pour DINO (mmdet non garanti en 3.14)
 - regarde les logs de build
 - teste YOLO d abord pour confirmer que l app demarre
 

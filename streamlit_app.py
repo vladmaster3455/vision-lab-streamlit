@@ -76,6 +76,7 @@ def get_model(model_name: str):
         if DetInferencer is None:
             raise RuntimeError(
                 "DINO indisponible: MMDetection non charge dans cet environnement. "
+                "Sur Streamlit Cloud, utilise Python 3.11 et installe mmdet/mmcv-lite/mmengine. "
                 f"Detail: {MMDET_IMPORT_ERROR}"
             )
         dino_weights = os.getenv("DINO_WEIGHTS", "").strip() or None

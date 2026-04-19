@@ -7,3 +7,6 @@ numpy>=1.26.0,<3
 pandas>=2.2.0,<3
 pillow>=11.3.0
 opencv-python-headless>=4.10.0.84
+mmengine>=0.10.5; python_version < "3.13"
+mmcv-lite>=2.1.0,<2.2.0; python_version < "3.13"
+mmdet>=3.3.0; python_version < "3.13"
