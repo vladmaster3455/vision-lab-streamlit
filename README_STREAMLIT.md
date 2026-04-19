@@ -72,3 +72,9 @@ Si tu vois `cannot open shared object file: libGL.so.1`:
 	- `libgl1`
 3. n'ajoute `ffmpeg` ou `libglib2.0-0` que si un log le demande explicitement (sinon cela peut casser l'installation apt)
 4. push `packages.txt`, puis fais Reboot app + Clear cache + Redeploy
+
+Si tu vois `libgthread-2.0.so.0` manquante:
+
+1. ajoute `libglib2.0-0` dans `packages.txt`
+2. garde `ffmpeg` absent (ne pas le remettre)
+3. push, puis Reboot app + Clear cache + Redeploy
