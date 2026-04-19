@@ -78,3 +78,17 @@ Si tu vois `libgthread-2.0.so.0` manquante:
 1. ajoute `libglib2.0-0` dans `packages.txt`
 2. garde `ffmpeg` absent (ne pas le remettre)
 3. push, puis Reboot app + Clear cache + Redeploy
+
+## 8) Ou sont les modeles (poids) sur Streamlit Cloud
+
+Tu ne vois pas forcement les fichiers de poids dans ton repo GitHub, c est normal.
+
+1. Les modeles Ultralytics (YOLO, RTDETR) se telechargent automatiquement au premier usage
+2. Sur Streamlit Cloud, ils sont stockes dans le cache du conteneur, pas dans ton depot GitHub
+3. En cas de redeploy, changement de machine ou clear cache, ils peuvent etre retelcharges
+4. Donc ne pas voir les `.pt` dans le repo n est pas un bug
+
+Si tu veux des poids fixes:
+
+1. pousse les fichiers `.pt` dans le repo (ou via Git LFS)
+2. configure les variables `YOLO_WEIGHTS` et `RTDETR_WEIGHTS` avec le chemin local dans le repo
