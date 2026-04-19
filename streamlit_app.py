@@ -3,7 +3,6 @@ from __future__ import annotations
 
 import gc
 import os
-import sys
 from collections import Counter
 from typing import Dict, List
 
@@ -229,21 +228,10 @@ def main() -> None:
 
     with st.sidebar:
         st.header("Parametres")
-        model_choices = ["YOLO", "RTDETR"]
-        if DetInferencer is not None:
-            model_choices.append("DINO")
-
-        model_name = st.selectbox("Modele", model_choices, index=0)
+        model_name = st.selectbox("Modele", ["YOLO", "RTDETR", "DINO"], index=0)
         conf = st.slider("Seuil de confiance", min_value=0.05, max_value=0.95, value=0.25, step=0.01)
         max_boxes = st.slider("Nombre max de boites", min_value=5, max_value=200, value=80, step=1)
         st.caption("Suggestion: commence avec YOLO pour valider le pipeline, puis teste DINO.")
-
-        if DetInferencer is None:
-            pyv = f"{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}"
-            st.warning(
-                "DINO desactive sur cet environnement (mmdet indisponible). "
-                f"Python detecte: {pyv}. Pour activer DINO sur Streamlit Cloud: Python 3.11 + deps mmengine/mmcv-lite/mmdet."
-            )
 
     uploaded = st.file_uploader("Charge une image", type=["png", "jpg", "jpeg", "bmp", "tif", "tiff"])
 
